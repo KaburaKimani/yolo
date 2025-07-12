@@ -6,13 +6,17 @@ const upload = multer();
 
 const productRoute = require('./routes/api/productRoute');
 
-// Connecting to the Database
-let mongodb_url = 'mongodb://localhost/';
-let dbName = 'yolomy';
+// Your MongoDB URI
+const MONGODB_URI = "mongodb+srv://elizabethkimani:bahatigirls2020@clusterliz.wzbov18.mongodb.net/lizdb?retryWrites=true&w=majority&appName=ClusterLiz";
 
-// define a url to connect to the database
-const MONGODB_URI = process.env.MONGODB_URI || mongodb_url + dbName
-mongoose.connect(MONGODB_URI,{useNewUrlParser: true, useUnifiedTopology: true  } )
+// Connect to MongoDB using Mongoose
+mongoose.connect(MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => console.log('MongoDB connected successfully'))
+.catch(err => console.log('MongoDB connection error:', err));
+
 let db = mongoose.connection;
 
 // Check Connection
