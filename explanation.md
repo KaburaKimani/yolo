@@ -1,8 +1,6 @@
 # Yolo - Full Stack MERN Application with Docker
 
-![MERN Stack](https://miro.medium.com/max/1200/1*H4PL7crbD3iDxUkXCCgXyw.png)
-
-A production-ready MERN (MongoDB, Express, React, Node.js) application with Docker containerization and CI/CD pipeline integration.
+A production-ready MERN (MongoDB, Express, React, Node.js) application with Docker containerization.
 
 ## 📌 Table of Contents
 - [Features](#-features)
@@ -12,10 +10,6 @@ A production-ready MERN (MongoDB, Express, React, Node.js) application with Dock
 - [Local Development](#-local-development)
 - [Environment Variables](#-environment-variables)
 - [Deployment](#-deployment)
-- [Troubleshooting](#-troubleshooting)
-- [API Reference](#-api-reference)
-- [Contributing](#-contributing)
-- [License](#-license)
 
 ## 🌟 Features
 - Containerized microservices architecture
