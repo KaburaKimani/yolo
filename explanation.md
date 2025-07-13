@@ -31,34 +31,29 @@ A production-ready MERN (MongoDB, Express, React, Node.js) application with Dock
 
 ## 📁 Project Structure
 yolo/
-├── client/ # React Frontend
-│ ├── public/ # Static assets
-│ ├── src/ # React components
-│ ├── Dockerfile # Production build config
-│ ├── package.json # Frontend dependencies
-│ └── .env.development # Client environment vars
+├── client/
+│ ├── public/
+│ ├── src/ 
+│ ├── Dockerfile 
+│ ├── package.json 
+│ └── .env.development
 │
-├── backend/ # Node.js API
-│ ├── controllers/ # Route controllers
-│ ├── models/ # MongoDB models
-│ ├── routes/ # API endpoints
-│ ├── Dockerfile # Backend config
-│ ├── package.json # Backend dependencies
-│ └── .env # Server environment vars
+├── backend/
+│ ├── controllers/
+│ ├── models/ 
+│ ├── routes/ 
+│ ├── Dockerfile 
+│ ├── package.MongoDB modelsjson 
+│ └── .env 
 │
-├── docker-compose.yml # Development environment
-├── docker-compose.prod.yml # Production environment
-├── .github/workflows/ # CI/CD pipelines
-│ └── deploy.yml
+├── docker-compose.yaml 
 └── README.md # This document
 
 ## 🐳 Docker Setup
 
 ### Container Images
 
-| Image Name                          | Last Updated       | Status  | Description                   |
-|-------------------------------------|--------------------|---------|-------------------------------|
-| `elizabethkimani/yolo-app`          | 23 hours ago       | Public  | Production-ready full stack   |
+![Docker Hub Image](image.png)
 
 ### Development Environment
 ```bash
