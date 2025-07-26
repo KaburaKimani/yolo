@@ -1,16 +1,33 @@
----
-- name: Pull image from repository
-  docker_image:
-    name: brianbwire/brian-yolo-backend:v1.0.0
-    source: pull
+- name: Log in to Docker Hub
+  community.docker.docker_login:
+    username: "elizabethkimani"
+    password: "bahatigirls2020"
 
-- name: Create Node.js Backend Container
-  docker_container:
-    name: brian-yolo-backend
-    image: brianbwire/brian-yolo-backend:v1.0.0
-    networks:
-      - name: app-net
+- name: Build Backend Docker image
+  community.docker.docker_image:
+    name: "yolo-backend:latest"
+    build:
+      path: "/home/liz/yolo/backend"
+      dockerfile: Dockerfile
+    source: build
+
+- name: Create Backend container
+  community.docker.docker_container:
+    name: backend
+    image: yolo-backend:latest
+    state: started
+    restart_policy: always
     ports:
       - "5000:5000"
-    command: "npm start"
-  become: yes
+
+- name: Verify Backend API is running
+  uri:
+    url: "http://localhost:5000/api/products"
+    method: GET
+    status_code: 200
+    timeout: 30
+  register: result
+  until: result.status == 200
+  retries: 15
+  delay: 5
+  ignore_errors: yes 
