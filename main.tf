@@ -1,3 +1,4 @@
+
  resource "aws_security_group" "server_sg" {
    name        = "server_sg"
    description = "Security group for the EC2 instances"
