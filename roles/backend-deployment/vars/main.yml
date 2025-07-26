@@ -1,4 +1,4 @@
----
-container_name: brian-yolo-backend
-network: app-net
-volume: app-mongo-data/app
+container_name: yolo-backend
+network: yolo_app-net
+volume: yolo_app-mongo-data
+image: yolo-backend:latest

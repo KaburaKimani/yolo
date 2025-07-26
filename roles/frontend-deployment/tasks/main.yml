@@ -1,0 +1,33 @@
+---
+- name: Build Frontend Docker image
+  community.docker.docker_image:
+    name: "elizabethkimani/yolo-app:v1.0.0"
+    build:
+      path: "/home/liz/yolo/frontend"
+      dockerfile: Dockerfile
+    source: build
+    push: yes
+
+- name: Create Frontend container
+  community.docker.docker_container:
+    name: yolo-client
+    image: "elizabethkimani/yolo-app:v1.0.0"
+    state: started
+    restart_policy: unless-stopped
+    ports:
+      - "3000:3000"
+    env:
+      REACT_APP_API_URL: "http://backend:5000"
+    networks:
+      - name: "yolo_app-net"
+    depends_on:
+      - yolo-backend
+
+- name: Verify Frontend is running
+  uri:
+    url: "http://localhost:3000"
+    return_content: yes
+  register: result
+  until: "'YOLO' in result.content"
+  retries: 10
+  delay: 10

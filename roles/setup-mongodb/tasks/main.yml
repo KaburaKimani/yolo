@@ -1,14 +1,23 @@
 ---
-- name: Run MongoDB Container
-  docker_container:
-    name: app-mongo
-    image: mongo
+- name: Pull MongoDB image
+  community.docker.docker_image:
+    name: mongo:latest
+    source: pull
+
+- name: Create MongoDB container
+  community.docker.docker_container:
+    name: mongodb
+    image: mongo:latest
+    state: started
+    restart_policy: unless-stopped
     ports:
-      - '27017:27017'
+      - "27017:27017"
     volumes:
-      - ./app-mongo-data:/data/db
+      - "yolo_app-mongo-data:/data/db"
     networks:
-      - name: app-net
-  tags:
-    - database
-    - backend
+      - name: "yolo_app-net"
+
+- name: Verify MongoDB is running
+  wait_for:
+    port: 27017
+    timeout: 60

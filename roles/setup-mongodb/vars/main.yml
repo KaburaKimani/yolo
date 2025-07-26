@@ -1,4 +1,6 @@
----
-mongo_container_name: app_mongo
-mongo_network: app-network
-mongo_volume: app-mongo-data
+container_name: mongo:latest
+container_state: started
+network: yolo_app-net
+volume: yolo_app-mongo-data
+image: mongo:latest
+port: 27017

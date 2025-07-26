@@ -1,6 +1,6 @@
 # Stage 1: Build React app
 FROM node:16-alpine AS builder
-WORKDIR /app
+WORKDIR /home/liz/yolo
 COPY package*.json ./
 RUN npm install
 COPY . .
