@@ -73,74 +73,58 @@ yolo/
 - Build and run containers locally:
 ```bash
 docker-compose up --build
+```
 - Backend runs on localhost:5000,Frontend on localhost:3000.
 
 ## 🤖  Ansible Deployment
+
 ### Ansible Instrumentation
 
 - Vagrant VM provisioning with Ubuntu 20.04
-
 - Ansible playbook with roles for:
-
-Backend deployment (Node.js/Express)
-
-Frontend deployment (React)
-
-MongoDB setup
-
+   Backend deployment (Node.js/Express)
+   Frontend deployment (React)
+   MongoDB setup
 - Variables files for environment configuration
-
 - GitHub repository cloning and setup
-
 - Containerized application deployment
-
 - Product persistence verification
- 
+
  To run Ansible:
    ansible-playbook playbook.yml -K
 
 ## 💻 Local Development
-Start backend:
+### Start backend:
+ cd backend && npm install && npm run dev
 
-bash
-Copy
-Edit
-cd backend && npm install && npm run dev
-Start frontend:
+### Start frontend:
+ cd client && npm install && npm start
 
-bash
-Copy
-Edit
-cd client && npm install && npm start
-🔐 Environment Variables
-Make sure to configure the following .env files:
+## 🔐 Environment Variables
+- Make sure to configure the following .env files:
+   backend/.env
+   ini
+   PORT=5000
+   MONGO_URI=mongodb://mongo:27017/yolo-db
+   client/.env
+   ini 
+   REACT_APP_API_URL=http://localhost:5000
 
-backend/.env
-ini
-Copy
-Edit
-PORT=5000
-MONGO_URI=mongodb://mongo:27017/yolo-db
-client/.env
-ini
-Copy
-Edit
-REACT_APP_API_URL=http://localhost:5000
-🚀 Deployment
+## 🚀 Deployment
 You can deploy using Ansible (recommended) or Terraform (optional):
 
 Ansible: Automates container deployment on the Vagrant-managed VM.
 
 Terraform (optional): Provisions AWS infrastructure (if integrated).
 
-📚 Documentation
-Explanation File
-✅ explanation.md includes:
+## 📚 Documentation
 
-Role execution order rationale
+ - explanation.md includes:
 
-Module selection justification
+  Role execution order rationale
 
-Architecture decisions
+  Module selection justification
+
+  Architecture decisions
 
 
