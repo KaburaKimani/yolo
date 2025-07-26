@@ -4,7 +4,7 @@ A production-ready MERN (MongoDB, Express, React, Node.js) application with Dock
 
 ## 📌 Table of Contents
 - [Features](#-features)
-- [IP Deliverables](#-ip-deliverables)
+- [AWS Instance Creation & Workflow](#-aws-instance-creation--workflow)
 - [Prerequisites](#-prerequisites)
 - [Project Structure](#-project-structure)
 - [Docker Setup](#-docker-setup)
@@ -12,6 +12,7 @@ A production-ready MERN (MongoDB, Express, React, Node.js) application with Dock
 - [Local Development](#-local-development)
 - [Environment Variables](#-environment-variables)
 - [Deployment](#-deployment)
+- [Documentation](#-documentation)
 
 ## 🌟 Features
 - Containerized microservices architecture
@@ -22,25 +23,11 @@ A production-ready MERN (MongoDB, Express, React, Node.js) application with Dock
 - Ansible automation for deployment
 - Health checks and monitoring
 
+## 🖼️ AWS Instance Creation & Workflow
 
-### Ansible Instrumentation
-- ✅ Vagrant VM provisioning with Ubuntu 20.04
-- ✅ Ansible playbook with roles for:
-  - Backend deployment (Node.js/Express)
-  - Frontend deployment (React)
-  - MongoDB setup
-- ✅ Variables files for environment configuration
-- ✅ GitHub repository cloning and setup
-- ✅ Containerized application deployment
-- ✅ Product persistence verification
+This diagram illustrates the setup and deployment flow when provisioning and running the YOLO application on AWS using Vagrant and Ansible:
 
-
-### Documentation
-- ✅ `explanation.md` with:
-  - Role execution order rationale
-  - Module selection justification
-  - Architecture decisions
-- ✅ Comprehensive README.md
+![AWS Instance Flow](aws-instance-flow.png)
 
 ## 🛠 Prerequisites
 
@@ -79,3 +66,81 @@ yolo/
 ├── docker-compose.yaml
 ├── Vagrantfile
 ├── explanation.md
+
+
+## 🐳 Docker Setup
+
+- Build and run containers locally:
+```bash
+docker-compose up --build
+- Backend runs on localhost:5000,Frontend on localhost:3000.
+
+## 🤖  Ansible Deployment
+### Ansible Instrumentation
+
+- Vagrant VM provisioning with Ubuntu 20.04
+
+- Ansible playbook with roles for:
+
+Backend deployment (Node.js/Express)
+
+Frontend deployment (React)
+
+MongoDB setup
+
+- Variables files for environment configuration
+
+- GitHub repository cloning and setup
+
+- Containerized application deployment
+
+- Product persistence verification
+ 
+ To run Ansible:
+   ansible-playbook playbook.yml -K
+
+## 💻 Local Development
+Start backend:
+
+bash
+Copy
+Edit
+cd backend && npm install && npm run dev
+Start frontend:
+
+bash
+Copy
+Edit
+cd client && npm install && npm start
+🔐 Environment Variables
+Make sure to configure the following .env files:
+
+backend/.env
+ini
+Copy
+Edit
+PORT=5000
+MONGO_URI=mongodb://mongo:27017/yolo-db
+client/.env
+ini
+Copy
+Edit
+REACT_APP_API_URL=http://localhost:5000
+🚀 Deployment
+You can deploy using Ansible (recommended) or Terraform (optional):
+
+Ansible: Automates container deployment on the Vagrant-managed VM.
+
+Terraform (optional): Provisions AWS infrastructure (if integrated).
+
+📚 Documentation
+Explanation File
+✅ explanation.md includes:
+
+Role execution order rationale
+
+Module selection justification
+
+Architecture decisions
+
+
