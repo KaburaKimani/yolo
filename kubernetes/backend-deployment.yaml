@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ip4-week8-cluster
+  namespace: yolo-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: yolo-app
+  template:
+    metadata:
+      labels:
+        app: yolo-app
+    spec:
+      containers:
+      - name: yolo-backend
+        image: elizabethkimani/yolo-backend:v1.1.0
+        ports:
+        - containerPort: 8000
