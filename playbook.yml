@@ -1,3 +1,17 @@
+- name: Launch EC2 Instance
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks:
+        - name: Launch a new EC2 instance
+          amazon.aws.ec2_instance:
+            name: Yolo-App
+            key_name: yolo-key
+            instance_type: t3.micro
+            image_id: ami-020cba7c55df1f615
+            region: us-east-1
+            state: present
+          register: ec2_info
 - name: Deploy YOLO Application with Ansible
   hosts: all
   connection: local
@@ -16,18 +30,5 @@
     - role: setup-mongodb
       tags: setup-mongodb
       
-- name: Launch EC2 Instance
-  hosts: localhost
-  connection: local
-  gather_facts: no
-  tasks:
-        - name: Launch a new EC2 instance
-          amazon.aws.ec2_instance:
-            name: Yolo-App
-            key_name: yolo-key
-            instance_type: t3.micro
-            image_id: ami-020cba7c55df1f615
-            region: us-east-1
-            state: present
-          register: ec2_info
+
     
