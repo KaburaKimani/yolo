@@ -1,34 +1,9 @@
-- name: Launch EC2 Instance
-  hosts: localhost
-  connection: local
-  gather_facts: no
-  tasks:
-        - name: Launch a new EC2 instance
-          amazon.aws.ec2_instance:
-            name: Yolo-App
-            key_name: yolo-key
-            instance_type: t3.micro
-            image_id: ami-020cba7c55df1f615
-            region: us-east-1
-            state: present
-          register: ec2_info
-- name: Deploy YOLO Application with Ansible
+---
+- name: Ansible playbook to dockerize and run yolo e-commerce app using ansible
   hosts: all
-  connection: local
-  become: yes
-  vars:
-    docker_username: "elizabethkimani"
-    repo_url: "https://github.com/KaburaKimani/yolo.git"
-    clone_dir: "/home/liz/yolo"
-    app_network: "yolo_app-net"
-
-  roles:
-    - role: backend-deployment
-      tags: backend-deployment
-    - role: frontend-deployment
-      tags: frontend-deployment
-    - role: setup-mongodb
-      tags: setup-mongodb
-      
-
+  become: true
+  roles: 
+    - frontend-deployment
+    - setup-mongodb   
+    - backend-deployment
     

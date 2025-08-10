@@ -6,3 +6,13 @@ all:
       ansible_user: vagrant
       ansible_private_key_file: /home/liz/yolo/.vagrant/machines/default/virtualbox/private_key
       ansible_python_interpreter: /usr/bin/python3
+  hosts:
+    local:
+      ansible_connection: local
+      ansible_python_interpreter: /usr/bin/python3
+    
+    myserver:
+      ansible_host: 127.0.0.1
+      ansible_port: 2222
+      ansible_user: vagrant
+      ansible_private_key_file: /home/liz/.ssh/id_ed25519
