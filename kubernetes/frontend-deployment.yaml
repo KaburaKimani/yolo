@@ -14,20 +14,26 @@ spec:
         app: frontend
     spec:
       containers:
-      - name: frontend
-        image: elizabethkimani/yolo-app:1.0.0
-        ports:
-        - containerPort: 8000
-        resources:
-          requests:
-            cpu: "100m"
-            memory: "128Mi"
-          limits:
-            cpu: "500m"
-            memory: "512Mi"
-        readinessProbe:
-          httpGet:
-            path: /health
-            port: 8000
-          initialDelaySeconds: 5
-          periodSeconds: 10
+        - name: yolo-container
+          image: elizabethkimani/yolo-app:v1.0.0
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            # In your deployment YAML:
+volumeMounts:
+- name: web-content
+  mountPath: /usr/share/nginx/html
+volumes:
+- name: web-content

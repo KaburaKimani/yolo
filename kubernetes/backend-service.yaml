@@ -6,6 +6,7 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-    - port: 5000
+    - port: 5000         # Service port exposed inside the cluster
+      targetPort: 8000   # Container port the backend app listens on
   selector:
-    app: backend
+    app: yolo-app        # Matches the label used in backend deployment pods

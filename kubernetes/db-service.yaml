@@ -1,11 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: db
+  name: mongodb  # match serviceName in StatefulSet spec
   namespace: yolo-app
 spec:
   ports:
-    - port: 3306
+    - port: 27017
+      targetPort: 27017
   clusterIP: None
   selector:
-    app: db
+    app: mongodb
