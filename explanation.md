@@ -1,4 +1,4 @@
-# Yolo - Full Stack MERN Application with Docker
+# Yolo - Full Stack MERN Application
 
 A production-ready MERN (MongoDB, Express, React, Node.js) application with Docker containerization and Ansible automation.
 
@@ -48,23 +48,46 @@ yolo/
 │ ├── backend-deployment/
 │ ├── frontend-deployment/
 │ └── setup-mongodb/
-├── terraform/ (optional)
-│ ├── backend-deployment/
-│ ├── frontend-deployment/
-│ └── setup-mongodb/
 ├── client/
 │ ├── public/
 │ ├── src/
+│ ├── build/
+│ ├── node_modules/
+│ ├── .gitignore
 │ ├── Dockerfile
+│ ├── package-lock.json
 │ └── package.json
+├── kubernetes/
+│ ├── backend-deployment.yaml
+│ ├── backend-service.yaml
+│ ├── db-pvc.yaml
+│ ├── db-service.yaml
+│ ├── db-statefulset.yaml
+│ ├── frontend-deployment.yaml
+│ ├── frontend-service.yaml
+│ ├── ingress.yaml
+│ └── namespace.yaml
 ├── backend/
-│ ├── controllers/
 │ ├── models/
 │ ├── routes/
 │ ├── Dockerfile
+│ ├── .gitignore
+│ ├── package-lock.json
+│ ├── server.js
+│ ├── upload.js
 │ └── package.json
 ├── docker-compose.yaml
 ├── Vagrantfile
+├── explanation.md
+├── node_modules/
+├── roles/
+│ ├── backend-deployment/
+│ ├── frontend-deployment/
+│ ├── setup-mongodb/
+├── docker-compose.yaml
+├── Vagrantfile
+├── main.tf
+├── playbook.yml
 ├── explanation.md
 
 
@@ -111,20 +134,59 @@ docker-compose up --build
    REACT_APP_API_URL=http://localhost:5000
 
 ## 🚀 Deployment
-You can deploy using Ansible (recommended) or Terraform (optional):
+You can deploy using Ansible:
 
 Ansible: Automates container deployment on the Vagrant-managed VM.
 
-Terraform (optional): Provisions AWS infrastructure (if integrated).
+## ☸️Minikube Deployment(Local Kubernetes)
+You can run the YOLO application in Minikube for local KUbernetes testing
 
+### Start Minikube
+```bash
+minikube start --memory=4096 --cpus=2
+```
+### Create Namespace
+```bash
+kubectl create namespace yolo-app
+```
+### Apply Kubernetes Manifests
+```bash
+kubectl create namespace yolo-app
+```
+### Enable ingress
+```bash
+minikube addons enable ingress
+```
+### Access Application
+```bash
+minikube service frontend-lb -n yolo-app
+```
+
+## ☁️ AWS Deployment (Kubernetes on EKS)
+
+### Create EKS cluster
+```bash
+eksctl create cluster --name yolo-cluster --region us-east-1 --nodes 3
+```
+### Deploy Application
+```bash
+kubectl create namespace yolo-app
+kubectl apply -f k8s/ -n yolo-app
+```
+### Configure Ingress with AWS Load Balancer Controller
+```bash
+kubectl apply -f ingress.yaml -n yolo-app
+```
+### Get Public URL
+```bash
+kubectl get ingress -n yolo-app
+```
 ## 📚 Documentation
 
- - explanation.md includes:
+explanation.md includes:
 
-  Role execution order rationale
+Role execution order rationale
 
-  Module selection justification
+Module selection justification
 
-  Architecture decisions
-
-
+Architecture decisions
