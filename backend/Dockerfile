@@ -1,5 +1,5 @@
-FROM node:16-alpine
-WORKDIR /home/liz/yolo
+FROM node:18-alpine AS builder
+WORKDIR /app
 COPY package*.json ./
 RUN npm install 
 COPY . .
@@ -9,4 +9,3 @@ WORKDIR /app
 COPY --from=builder /app /app
 EXPOSE 8000
 CMD ["node", "server.js"]
-
